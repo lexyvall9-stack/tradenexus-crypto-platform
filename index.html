@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TradeNexus Trading Platform</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    iframe {
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="flex items-center justify-between px-6 py-4 border-b border-gray-800 bg-black sticky top-0">
+    <h1 class="text-2xl font-bold text-green-400">
+      TradeNexus
+    </h1>
+
+    <div class="hidden md:flex gap-6 text-gray-300">
+      <a href="#markets">Markets</a>
+      <a href="#trade">Trade</a>
+      <a href="#deposit">Deposit</a>
+    </div>
+
+    <button class="bg-green-500 text-black font-bold px-5 py-2 rounded-xl">
+      Login
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="px-6 md:px-20 py-20 grid md:grid-cols-2 gap-10 items-center">
+
+    <div>
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+        Trade Crypto
+        <span class="text-green-400">Anywhere</span>
+      </h1>
+
+      <p class="text-gray-400 mt-6 text-lg">
+        Modern crypto trading platform with live Bitcoin prices,
+        wallet balances, M-Pesa deposits and mobile support.
+      </p>
+
+      <div class="mt-8 flex gap-4">
+        <button class="bg-green-500 hover:bg-green-400 text-black font-bold px-6 py-3 rounded-2xl">
+          Start Trading
+        </button>
+
+        <button class="border border-gray-700 px-6 py-3 rounded-2xl">
+          Learn More
+        </button>
+      </div>
+    </div>
+
+    <!-- BTC CARD -->
+    <div class="bg-gray-900 rounded-3xl p-6 border border-gray-800">
+
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h2 class="text-xl font-semibold">BTC/USDT</h2>
+          <p id="btcPrice" class="text-green-400 text-3xl font-bold mt-2">
+            Loading...
+          </p>
+        </div>
+
+        <div class="bg-green-500/20 text-green-400 px-4 py-2 rounded-xl">
+          LIVE
+        </div>
+      </div>
+
+      <!-- TradingView -->
+      <div class="rounded-2xl overflow-hidden border border-gray-800 h-[400px]">
+        <iframe
+          src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&theme=dark"
+          width="100%"
+          height="100%">
+        </iframe>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Wallet Balance -->
+  <section class="px-6 md:px-20 py-16">
+
+    <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8">
+
+      <h2 class="text-3xl font-bold mb-6">
+        Wallet Balance
+      </h2>
+
+      <div id="walletBalance"
+           class="text-5xl font-bold text-green-400 mb-6">
+        $12,500
+      </div>
+
+      <div class="flex gap-4 flex-wrap">
+
+        <button onclick="depositFunds()"
+          class="bg-green-500 hover:bg-green-400 text-black font-bold px-6 py-3 rounded-2xl">
+          Deposit $500
+        </button>
+
+        <button onclick="withdrawFunds()"
+          class="bg-red-500 hover:bg-red-400 text-white font-bold px-6 py-3 rounded-2xl">
+          Withdraw $200
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Trading Panel -->
+  <section id="trade" class="px-6 md:px-20 py-16">
+
+    <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8">
+
+      <h2 class="text-3xl font-bold mb-8">
+        Trading Panel
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- BUY -->
+        <div class="bg-black border border-gray-800 rounded-2xl p-6">
+
+          <h3 class="text-2xl font-bold mb-4">
+            Buy BTC
+          </h3>
+
+          <input
+            type="number"
+            placeholder="Amount in USD"
+            class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 mb-4"
+          />
+
+          <button
+            class="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-3 rounded-xl">
+            Buy Bitcoin
+          </button>
+
+        </div>
+
+        <!-- SELL -->
+        <div class="bg-black border border-gray-800 rounded-2xl p-6">
+
+          <h3 class="text-2xl font-bold mb-4">
+            Sell BTC
+          </h3>
+
+          <input
+            type="number"
+            placeholder="BTC Amount"
+            class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 mb-4"
+          />
+
+          <button
+            class="w-full bg-red-500 hover:bg-red-400 text-white font-bold py-3 rounded-xl">
+            Sell Bitcoin
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- M-Pesa Deposit -->
+  <section id="deposit" class="px-6 md:px-20 py-16">
+
+    <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8">
+
+      <h2 class="text-3xl font-bold mb-8">
+        Deposit via M-Pesa
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-10">
+
+        <!-- Payment Form -->
+        <div>
+
+          <input
+            type="text"
+            id="phone"
+            placeholder="2547XXXXXXXX"
+            class="w-full bg-black border border-gray-700 rounded-2xl px-4 py-3 mb-4"
+          />
+
+          <input
+            type="number"
+            id="amount"
+            placeholder="Amount"
+            class="w-full bg-black border border-gray-700 rounded-2xl px-4 py-3 mb-4"
+          />
+
+          <button onclick="payMpesa()"
+            class="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-3 rounded-2xl">
+            Pay with M-Pesa
+          </button>
+
+        </div>
+
+        <!-- Bank Details -->
+        <div class="bg-black border border-gray-800 rounded-2xl p-6">
+
+          <h3 class="text-2xl font-bold mb-4">
+            Bank Details
+          </h3>
+
+          <div class="space-y-4 text-gray-300">
+
+            <div>
+              <p class="text-gray-500 text-sm">Bank Name</p>
+              <p class="font-semibold">Co-operative Bank</p>
+            </div>
+
+            <div>
+              <p class="text-gray-500 text-sm">Account Name</p>
+              <p class="font-semibold">TradeNexus Trading Ltd</p>
+            </div>
+
+            <div>
+              <p class="text-gray-500 text-sm">Account Number</p>
+              <p class="font-semibold">01102344425001</p>
+            </div>
+
+            <div>
+              <p class="text-gray-500 text-sm">Currency</p>
+              <p class="font-semibold">USD</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Features -->
+  <section id="markets" class="px-6 md:px-20 py-20">
+
+    <h2 class="text-4xl font-bold text-center mb-14">
+      Platform Features
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8">
+        <h3 class="text-2xl font-bold mb-4">
+          Real-Time Trading
+        </h3>
+
+        <p class="text-gray-400">
+          Live Bitcoin prices and advanced trading charts.
+        </p>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8">
+        <h3 class="text-2xl font-bold mb-4">
+          Secure Wallet
+        </h3>
+
+        <p class="text-gray-400">
+          Protected wallet system and encrypted transactions.
+        </p>
+      </div>
+
+      <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8">
+        <h3 class="text-2xl font-bold mb-4">
+          Mobile Support
+        </h3>
+
+        <p class="text-gray-400">
+          Fully responsive for Android, iPhone and desktop.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-800 px-6 py-10 text-center text-gray-500">
+    © 2026 TradeNexus Trading Ltd
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    // LIVE BTC PRICE
+    async function fetchBTCPrice() {
+      try {
+
+        const response = await fetch(
+          "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"
+        );
+
+        const data = await response.json();
+
+        const price = parseFloat(data.price).toLocaleString();
+
+        document.getElementById("btcPrice").innerText =
+          "$" + price;
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchBTCPrice();
+
+    setInterval(fetchBTCPrice, 5000);
+
+    // WALLET BALANCE
+    let balance = 12500;
+
+    function updateBalance() {
+      document.getElementById("walletBalance").innerText =
+        "$" + balance.toLocaleString();
+    }
+
+    function depositFunds() {
+      balance += 500;
+      updateBalance();
+    }
+
+    function withdrawFunds() {
+      balance -= 200;
+      updateBalance();
+    }
+
+    // MPESA BUTTON
+    function payMpesa() {
+
+      const phone =
+        document.getElementById("phone").value;
+
+      const amount =
+        document.getElementById("amount").value;
+
+      if (!phone || !amount) {
+        alert("Enter phone and amount");
+        return;
+      }
+
+      alert(
+        "STK Push request sent to " + phone
+      );
+    }
+
+  </script>
+
+</body>
+</html>
