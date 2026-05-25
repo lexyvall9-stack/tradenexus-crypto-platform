@@ -1,1 +1,1 @@
-# tradenexus-crypto-platform
+# tradenex-crypto-platform
